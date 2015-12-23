@@ -18,6 +18,7 @@ jim = Person('Jim', 'Johnson')
 jim.articulate()
 
 Person.articulate = pretty_articulate
+del pretty_articulate  # Not necessary, but cleans up namespace
 
 jim.articulate()
 

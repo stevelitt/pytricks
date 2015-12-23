@@ -18,6 +18,7 @@ jim = Person('Jim', 'Johnson')
 jim.articulate()
 
 jim.articulate = types.MethodType(pretty_articulate, jim, Person)
+del pretty_articulate  # Not necessary, but cleans up namespace
 
 jim.articulate()
 
