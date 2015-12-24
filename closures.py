@@ -18,5 +18,3 @@ print(counter1())    # 4
 print(counter2())    # 2
 print(counter2())    # 3
 print(counter1())    # 5
-
-
