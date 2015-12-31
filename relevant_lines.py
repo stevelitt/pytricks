@@ -1,44 +1,59 @@
 #!/usr/bin/python3
 import sys
+import types
+import re
+import subprocess
 
-def relevant_lines(dic):
-    if 'this_line_number' not in dic:
-        dic['this_line_number'] = 0
-    if 'this_line_text' not in dic:
-        dic['this_line_text'] = 0
-    if 'is_relevant' not in dic:
-        def junkfcn():
-            return dic['this_line_text'].strip() != ''
-        dic['is_relevant'] = junkfcn
-        del junkfcn
-
-    def rtrnfcn():
-        dic['this_line_text'] = sys.stdin.readline()
-        dic['this_line_text'] = dic['this_line_text']
-        dic['this_line_number'] += 1
-
-        # Blow off any nonrelevant lines
-        while dic['this_line_text'] and not dic['is_relevant']():
-            dic['this_line_text'] = sys.stdin.readline()
-            dic['this_line_number'] += 1
-
-        # Return None if eof
-        if dic['this_line_text'] == '':
+class Relevant_lines():
+    def __init__(self, streem):
+        self.streem = streem
+    EOF = False
+    this_line_number = 0
+    this_line_text = 'init'
+    def is_relevant(self):
+        return self.this_line_text.strip() != ''
+    def tweak(self):
+        return 0
+    def nextt(self):
+        self.this_line_text = self.streem.readline().decode('utf-8')
+        if self.this_line_text == '':
+            self.EOF = True
+        self.this_line_number += 1
+        while not self.EOF and not self.is_relevant():
+            self.this_line_text = self.streem.readline().decode('utf-8')
+            if self.this_line_text == '':
+                self.EOF = True
+            self.this_line_number += 1
+        self.this_line_text = self.this_line_text.strip()
+        if self.EOF:
             return -99, 'basura'
-
-        else: # Run tweak procedure and then return the line number and text
-            if 'tweak' in dic:
-                dic['tweak']()
-        return dic['this_line_number'], dic['this_line_text'].strip()
-    return rtrnfcn 
+        else:
+            self.tweak()
+            return self.this_line_number, self.this_line_text
 
 
-mydict = {}
-nextt = relevant_lines(mydict)
-(lineno, txt) = nextt()
-while lineno != -99:
-    print('Line {}: {}'.format(str(lineno), txt))
-    (lineno, txt) = nextt()
+def main():
 
+    class Rl_inotify(Relevant_lines):
+        def is_relevant(self):
+            return True  ### Move down to restrict passed lines
+            if re.match('/dev/pts/', self.this_line_text):
+                return False
+            if re.match('/dev/snd/', self.this_line_text):
+                return False
+            if re.match('/dev/input/', self.this_line_text) and re.search('ACCESS', self.this_line_text):
+                    return False
+            if re.match('/dev/\s', self.this_line_text):
+                return False
+            return True
 
+    procout = subprocess.Popen(['/usr/bin/inotifywait', '-m', '-r', '/dev'], stdout=subprocess.PIPE, bufsize=1)
+    rl = Rl_inotify(procout.stdout)
+    #rl = Rl_inotify(sys.stdin)
 
+    (lineno, txt) = rl.nextt()
+    while lineno != -99:
+        print(txt)
+        (lineno, txt) = rl.nextt()
+
+main()
