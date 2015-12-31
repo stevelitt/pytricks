@@ -1,0 +1,20 @@
+stdin_inside.py:
+	: Demo spawning process and reaping its output
+	
+monkeypatch.py:
+	: Demo for changing CLASS methods in Python
+
+methodchange.py:
+	: Demo for changing INSTANCE methods in Python
+	
+nestedfcn.py:
+	: Demo for nested functions like Pascal has
+
+callbacks.py
+	: Trivial demo of callback functions in Python
+	
+closures.py:
+	: Demo of closures in Python
+
+relevant_lines_oop.py:
+	: Demo of OOP based "intelligent continue statement"
