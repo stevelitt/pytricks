@@ -1,11 +1,14 @@
 #!/usr/bin/python3
 
 """
+An intelligent continue statement replacement.
+
 Demonstrate use of Relevent_lines() class to provide an
 intelligent continue statement, and how to subclass it 
 for your unique use case.
+
 Copyright (c) 2015-2016 by Steve Litt
-License Expat: http://directory.fsf.org/wiki/License:Expat 
+License: Expat: http://directory.fsf.org/wiki/License:Expat 
 """
 
 

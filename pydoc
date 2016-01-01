@@ -1,0 +1,3 @@
+#!/bin/sh
+modulename=`echo $1 | sed -e 's/\.py$//'`
+pydoc $modulename

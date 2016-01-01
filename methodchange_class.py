@@ -1,9 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """
-Demonstrate monkey patching: Another word for changing
-a method class-wide, so that from the moment of the
-change, all instances of the class now use the new
+Demonstrate changing a method class-wide.
+
+Change a method class-wide, so that
+from the moment of the change, all instances of
+the class, existing or future, now use the new
 method.
+
 Copyright (c) 2015-2016 by Steve Litt
 License Expat: http://directory.fsf.org/wiki/License:Expat 
 """

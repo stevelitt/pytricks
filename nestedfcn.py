@@ -7,7 +7,7 @@ pathname, and for symlinks, prints the full path of the
 target file or directory.
 
 Copyright (c) 2015-2016 by Steve Litt
-License Expat: http://directory.fsf.org/wiki/License:Expat 
+License: Expat: http://directory.fsf.org/wiki/License:Expat 
 """
 
 

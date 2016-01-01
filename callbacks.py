@@ -3,7 +3,7 @@
 Demonstrate the use of callback functions
 
 Copyright (c) 2016 by Steve Litt
-License Expat: http://directory.fsf.org/wiki/License:Expat 
+License: Expat: http://directory.fsf.org/wiki/License:Expat 
 """
 
 
