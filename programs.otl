@@ -1,3 +1,7 @@
+path_properties.py:
+	: How to find the real path of a symlink
+	:  as well as file, dir, symlink status
+
 stdin_inside.py:
 	: Demo spawning process and reaping its output
 	
