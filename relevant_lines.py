@@ -1,10 +1,30 @@
 #!/usr/bin/python3
+
+"""
+Demonstrate use of Relevent_lines() class to provide an
+intelligent continue statement, and how to subclass it 
+for your unique use case.
+Copyright (c) 2015-2016 by Steve Litt
+License Expat: http://directory.fsf.org/wiki/License:Expat 
+"""
+
+
 import sys
 import types
 import re
 import subprocess
 
 class Relevant_lines():
+    """
+    Base class for intelligent continue statement.
+    Subclass it to screen out the right lines, by
+    overriding the is_relevant() method. Although
+    not demonstrated in this program, break logic
+    can be implemented by overriding tweak() and
+    using one or more added properties (such as
+    counters or "last iteration save variables).
+    Methods nextt() is not meant to be overridden.
+    """
     def __init__(self, streem):
         self.streem = streem
     EOF = False
@@ -32,20 +52,43 @@ class Relevant_lines():
             return self.this_line_number, self.this_line_text
 
 
-def main():
+class Rl_inotify(Relevant_lines):
+    """
+    The Rl_inotify class overrides the base is_relevant()
+    method to screen out the desired lines.
+    """
 
-    class Rl_inotify(Relevant_lines):
-        def is_relevant(self):
-            return True  ### Move down to restrict passed lines
-            if re.match('/dev/pts/', self.this_line_text):
-                return False
-            if re.match('/dev/snd/', self.this_line_text):
-                return False
-            if re.match('/dev/input/', self.this_line_text) and re.search('ACCESS', self.this_line_text):
-                    return False
-            if re.match('/dev/\s', self.this_line_text):
-                return False
-            return True
+    def is_relevant(self):
+        """
+        The is_relevant() method is what screens out the
+        desired lines. In this example program, it is
+        created for ease of experimentation.
+        """
+
+        #if re.match('/dev/pts/', self.this_line_text):
+        #    return False
+        #if re.match('/dev/snd/', self.this_line_text):
+        #    return False
+        #if re.match('/dev/input/', self.this_line_text) and re.search('ACCESS', self.this_line_text):
+        #        return False
+        #if re.match('/dev/\s', self.this_line_text):
+        #    return False
+        return True
+
+
+
+
+def main():
+    """
+    main() runs the logic of this program.
+    It instantiates an instance of the
+    Rl_inotify subclass of the Relevant_lines
+    superclass. Then it uses subprocess.Popen
+    to run inotifywait and receive its output
+    as input. Finally, it runs a loop that gets
+    the next relevant line from Rl_notify.nextt().
+    """
+
 
     procout = subprocess.Popen(['/usr/bin/inotifywait', '-m', '-r', '/dev'], stdout=subprocess.PIPE, bufsize=1)
     rl = Rl_inotify(procout.stdout)
@@ -56,4 +99,6 @@ def main():
         print(txt)
         (lineno, txt) = rl.nextt()
 
-main()
+
+if __name__ == "__main__":
+    main()

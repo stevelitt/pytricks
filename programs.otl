@@ -1,10 +1,10 @@
 stdin_inside.py:
 	: Demo spawning process and reaping its output
 	
-monkeypatch.py:
+methodchange_class.py:
 	: Demo for changing CLASS methods in Python
 
-methodchange.py:
+methodchange_instance.py:
 	: Demo for changing INSTANCE methods in Python
 	
 nestedfcn.py:
