@@ -19,13 +19,22 @@ import subprocess
 
 
 def main():
+    """
+    Open a process with subprocess.Popen(), read that
+    processes stdout once, then loop through repeated
+    reads of its stdout. Note the use of decode('utf-8'),
+    which eliminates the b at the front of the string and
+    the extraneous singlequotes.
+    """
     args=['/usr/bin/inotifywait', '-m', '-r', '/dev']
     process = subprocess.Popen(args, stdout=subprocess.PIPE, bufsize=1)
     line = process.stdout.readline().decode('utf-8')
     while line != '':
         line = line.strip()
         if not re.match('/dev/pts', line) and \
-           not re.match('/dev/snd', line):
+           not re.match('/dev/snd', line) and \
+           not re.match('/dev/dri', line) and \
+           not re.match('/dev/shm', line):
                 print(line)
         line = process.stdout.readline().decode('utf-8')
 
