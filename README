@@ -1,0 +1,20 @@
+README
+Steve Litt's Python Tricks and Tweaks presentation
+
+Copyright (C) 2016 by Steve Litt
+License: Expat: http://directory.fsf.org/wiki/License:Expat
+
+To install, copy everything into a directory, and creat a
+directory called random_directory in that directory.
+
+To read about one of the python files, do the following:
+
+./pydoc python_file_name
+
+The ./pydoc file is a shellscript that strips off the ending
+.py so that the real pydoc does the right thing, while you
+can still use tab completion for filenames.
+
+For each Python file, in the order specified by programs.otl,
+read about the program with ./pydoc to see what it does,
+then run the program, then look at the source code.
