@@ -13,6 +13,12 @@ methodchange_instance.py:
 	
 nestedfcn.py:
 	: Demo for nested functions like Pascal has
+	
+stringslice.py:
+	: Intro to Python string slicing
+
+insert_commas.py:
+	: Contrived "practical" use of string slicing
 
 callbacks.py
 	: Trivial demo of callback functions in Python
