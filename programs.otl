@@ -30,5 +30,8 @@ callbacks.py
 closures.py:
 	: Demo of closures in Python
 
+tkinter_hello.py:
+	: Simplest possible tkinter GUI program
+
 relevant_lines_oop.py:
 	: Demo of OOP based "intelligent continue statement"
