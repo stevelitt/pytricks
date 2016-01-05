@@ -8,7 +8,7 @@ on a projector. Note the fancy footwork importing
 "tkinter" for Python3 but "Tkinter" for
 Python 2.
 
-Copyright (c) 2015-2016 by Steve Litt
+Copyright (c) 2016 by Steve Litt
 License: Expat: http://directory.fsf.org/wiki/License:Expat 
 """
 
