@@ -5,6 +5,10 @@ path_properties.py:
 stdin_inside.py:
 	: Demo spawning process and reaping its output
 	
+existornot.py:
+	: Demo pythonic ways of checking for existence
+	: of keys and values in lists and dicts.
+
 methodchange_class.py:
 	: Demo for changing CLASS methods in Python
 
